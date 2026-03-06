@@ -8,11 +8,13 @@ class ATM
     double balance;
     int pin;
     double amount;
+    bool isAuthenticated;
 
     public:
     ATM()
     {
         this->balance = 10000;
+        this->isAuthenticated = false;
     }
 
     ATM &InsertCard()
@@ -28,19 +30,26 @@ class ATM
 
         if (pin == 1234)
         {
+            isAuthenticated = true;
             cout << "Pin Accepted" << endl;
             return *this;
         }
         else
         {
+            isAuthenticated = false;
             cout << "Invalid Pin!" << endl;
             return *this;
-            exit(0);
         }
     }
 
     ATM &Withdraw()
     {
+        if (!isAuthenticated)
+        {
+            cout << "Authentication required before withdrawal." << endl;
+            return *this;
+        }
+
         cout << " Enter Withdrawal Amount: ";
         cin >> amount;
 
@@ -59,6 +68,11 @@ class ATM
 
     void CheckBalance()
     {
+        if (!isAuthenticated)
+        {
+            cout << "Authentication required to check balance." << endl;
+            return;
+        }
         cout << "Current Balance: " << balance << endl;
     }
 

@@ -15,16 +15,12 @@ NUMBER(int real, int imag){
     this->imag = imag;
 }
 
-NUMBER& operator + (NUMBER const &obj){
-    this->real = real + obj.real;
-    this->imag = imag + obj.imag;
-    return *this;
+NUMBER operator + (NUMBER const &obj) const{
+    return NUMBER(real + obj.real, imag + obj.imag);
 }
 
-NUMBER& operator - (NUMBER const &obj){
-    this->real = real - obj.real;
-    this->imag = imag - obj.imag;
-    return *this;
+NUMBER operator - (NUMBER const &obj) const{
+    return NUMBER(real - obj.real, imag - obj.imag);
 }
 
 void display(){
